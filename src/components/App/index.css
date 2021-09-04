@@ -5,7 +5,8 @@
     gap: 10px;
     flex-direction: column;
     padding: 1em;
-    margin: 1em;
+    max-width: 500px;
+    margin: 1em auto;
 }
 
 .person-card {
@@ -16,4 +17,5 @@
 
 .person-card:hover {
     transform: translate(5px, -5px);
+    box-shadow: -5px 5px grey;
 }

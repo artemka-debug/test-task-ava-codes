@@ -1,0 +1,28 @@
+.svg-button {
+    width: 40px !important;
+    height: 40px;
+    padding: 10px;
+}
+
+.svg-button:hover {
+    border-radius: 9999px;
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    animation: sliding-from-top 0.5s;
+    height: 50px;
+}
+
+@keyframes sliding-from-top {
+    from {
+        height: 0;
+    }
+
+    to {
+        height: 50px;
+    }
+}
