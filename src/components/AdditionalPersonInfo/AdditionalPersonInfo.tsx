@@ -16,7 +16,7 @@ const getInfoFromAdditionalInfo = (
   name: typeof ADDITIONAL_STAR_WARS_PERSON_INFO_NAMES[number],
   infos: any[]
 ) => {
-  if (name === 'films') {
+  if (name === 'film') {
     return infos.map((info) => `Episode ${cardinalToRoman(info.episode_id)}`)
   }
 
@@ -27,26 +27,16 @@ const AdditionalPersonInfo: FC<AdditionalPersonInfoProps> = ({
                                                                urlList,
                                                                name
                                                              }) => {
-  const {
-          results,
-          error,
-          status
-        } = useAdditionalInfo(name, urlList);
+  const results = useAdditionalInfo(name, urlList);
 
   return (
     <div>
       <h3>{upperFirst(name)}: {
-        (status === RequestStatus.NotUsed || results?.length === 0) && `No ${name} was found`
+        results.length === 0 && `No ${name} was found`
       }</h3>
-      {error ?
-        <div>There was an error getting {name}</div> :
-          status === RequestStatus.Loading ||
-          results === null ?
-          <div>Loading {name}...</div> :
-          <ul>
-            {getInfoFromAdditionalInfo(name, results).map((info) => <li key={info}>{info}</li>)}
-          </ul>
-      }
+      <ul>
+        {getInfoFromAdditionalInfo(name, results).map((info) => <li key={info}>{info}</li>)}
+      </ul>
     </div>
   )
 };

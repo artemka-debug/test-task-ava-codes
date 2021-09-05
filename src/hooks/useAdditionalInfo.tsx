@@ -1,42 +1,24 @@
 import {ADDITIONAL_STAR_WARS_PERSON_INFO_NAMES} from "../constants";
-import {useStarWarsSdk}                         from "../sdk/hooks/useStarWarsSdk";
 import {
   useEffect,
   useState
 }                                               from "react";
-import {
-  first,
-  last
-}                                               from "utils";
 
 const useAdditionalInfo = (
   name: typeof ADDITIONAL_STAR_WARS_PERSON_INFO_NAMES[number],
   urlList: string[],
 ) => {
-  const [{
-    error,
-    status
-  }, dispatch] = useStarWarsSdk(name);
-  const [results, setResults] = useState<null | unknown[]>(null);
-  const getIdsFromUrls = (urlList: string[]) => urlList
-    .map((url) =>
-      last(url.replace(/\//ig, ' ').trim().split(' '))
-    )
-
+  const [results, setResults] = useState<any[]>([]);
 
   useEffect(() => {
     const getAdditionalInfo = async () => {
-      const ids = getIdsFromUrls(urlList);
-      setResults(
-        (await Promise.all(ids.map((id) => dispatch(id))))
-          .map((infos) => infos && first<any>(infos)?.data)
-      )
+      setResults(urlList.map((url) => JSON.parse(localStorage.getItem(`${name}_${url}`) ?? '{}')))
     }
 
     getAdditionalInfo();
-  }, [dispatch, urlList])
+  }, [name, urlList])
 
-  return {error, status, results}
+  return results;
 }
 
 export {useAdditionalInfo}

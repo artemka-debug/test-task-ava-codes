@@ -14,7 +14,7 @@ export enum RequestStatus {
 
 type RequestResult<T extends any> = T[] | null;
 
-type RequestInfo<T> = {
+export type RequestInfo<T> = {
   result: RequestResult<T>;
   status: RequestStatus;
   error: string | null;

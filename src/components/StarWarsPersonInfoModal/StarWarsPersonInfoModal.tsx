@@ -46,7 +46,7 @@ const StarWarsPersonInfoModal: FC<StarWarsPersonInfoModalProps> = ({
       />
     </div>
     {ADDITIONAL_STAR_WARS_PERSON_INFO_NAMES.map((name) => (
-      <AdditionalPersonInfo key={name} name={name} urlList={person[name]} />
+      <AdditionalPersonInfo key={name} name={name} urlList={person[`${name}s`]} />
     ))}
   </Modal>
 };
