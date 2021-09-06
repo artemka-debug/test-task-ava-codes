@@ -32,3 +32,7 @@ export const cardinalToRoman = (num: number) => {
   return roman;
 };
 
+export function getIdFromPersonUrl(url: string) {
+  return last(url.replace(/\//ig, ' ').trim().split(' '))
+}
+
