@@ -29,13 +29,13 @@ const App = () => {
     date: {}
   });
   const [selectedPerson, setSelectedPerson] = useState<StarWarsPerson | null>(null);
+  const [filtredPeople, setFiltredPeople] = useState<StarWarsPerson[] | null>(result);
 
   const filterPeople = (people: StarWarsPerson[] | null) => {
     if (!people) return [];
 
     const { movies, species, date } = currentFilter;
     let result = people;
-    console.log(people);
 
     if (movies.length !== 0) {
       result = result
@@ -77,8 +77,7 @@ const App = () => {
   }
 
   useEffect(() => {
-    console.log(currentFilter);
-    refetch()
+    setFiltredPeople(filterPeople(result))
   }, [currentFilter])
 
   return <main className="main">
@@ -90,7 +89,7 @@ const App = () => {
             <Filters className="card" onFiltersChange={onFilterChange} filter={currentFilter} />
             <div className="card">
               <h1>Star Wars People List</h1>
-              {filterPeople(result).map((person) => (
+              {filtredPeople?.map((person) => (
                 <div className="person-card"
                      key={person.name}
                      onClick={() => setSelectedPerson(person)}
