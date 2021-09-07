@@ -95,6 +95,7 @@ const App = () => {
 
   useEffect(() => setFiltredPeople(filterPeople(result)), [currentFilter])
   useEffect(() => refetch(), [])
+  useEffect(() => setFiltredPeople(result), [result])
 
   const handleDragStart = () => {
     setIsDragging(true);
